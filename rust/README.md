@@ -19,6 +19,7 @@ A basic Rust application that will incorporate the Inner Source library.
 1. Create the library
 ```bash
 cargo new --lib yogi_quotes
+```
 2. Create the app
 ```bash
 cargo new yogi_app
