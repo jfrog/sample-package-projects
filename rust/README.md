@@ -15,4 +15,12 @@ A simple library that will return a randomly-selected quote from the late, great
 ## Production Application
 A basic Rust application that will incorporate the Inner Source library.  
 
+## Steps
+1. Create the library
+```bash
+cargo new --lib yogi_quotes
+2. Create the app
+```bash
+cargo new yogi_app
+```
 
