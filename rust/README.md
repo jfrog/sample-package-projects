@@ -6,7 +6,7 @@ The two Rust projects in this folder will demonstrate the basics of integrating 
 Jfrog's Artifactory.
 
 # Project Structure
-This repo will hold two projects: an "Inner Source" library, to be built and published with Artifactory's Cargo 
+This repo will hold two projects: an ["Inner Source"](https://en.wikipedia.org/wiki/Inner_source) library, to be built and published with Artifactory's Cargo 
 integration, and a "Production" application that will incorporate the library.
 
 ## Inner Source Library
