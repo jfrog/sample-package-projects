@@ -2,7 +2,7 @@
 on:
   push:
     branches:
-    - nuget-sample-library
+    - nugel-sample-library
 permissions:
   actions: read # for detecting the Github Actions environment.
   id-token: write # for creating OIDC tokens for signing.
