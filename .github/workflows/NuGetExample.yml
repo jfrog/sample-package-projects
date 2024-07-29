@@ -39,8 +39,8 @@ jobs:
    # - name: Set VERSION variable from tag
   #    run: echo "VERSION=${GITHUB_REF/refs\/tags\/v/}" >> $GITHUB_ENV
     - name: Build
-      run: dotnet build --configuration Release /p:Version=${{ vars.VERSION }}.${{github.run_number}}
+      run: dotnet build --configuration Release /p:Version=${{ vars.NUGET_VERSION }}.${{github.run_number}}
     - name: Pack
-      run: dotnet pack --configuration Release /p:Version=${{ vars.VERSION }}.${{github.run_number}} --no-build --output .
+      run: dotnet pack --configuration Release /p:Version=${{ vars.NUGET_VERSION }}.${{github.run_number}} --no-build --output .
     - name: Push
-      run: jfrog rt u NuGet.Library.${VERSION}.${{github.run_number}}.nupkg --source https://${{ vars.JF_URL }}/ghjfdemo-nuget-Dev-local/ 
+      run: jfrog rt u NuGet.Library.${{ vars.NUGET_VERSION }}.${{github.run_number}}.nupkg --source https://${{ vars.JF_URL }}/ghjfdemo-nuget-Dev-local/ 
