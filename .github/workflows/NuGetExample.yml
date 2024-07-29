@@ -45,4 +45,4 @@ jobs:
     - name: Push
      # run: |
      #     jf rt u  --build=name="JF.Library" ${{ vars.NUGET_VERSION }}.${{github.run_number}}
-      run: jfrog rt u JF.Library.${{ vars.NUGET_VERSION }}.${{github.run_number}}.nupkg ghjfdemo-nuget-Dev-local --build-name="JF.Library" --build-number=${{ vars.NUGET_VERSION }}.${{github.run_number}} 
+      run: jfrog rt u sample-library.${{ vars.NUGET_VERSION }}.${{github.run_number}}.nupkg ghjfdemo-nuget-Dev-local --build-name="JF.Library" --build-number=${{ vars.NUGET_VERSION }}.${{github.run_number}} 
