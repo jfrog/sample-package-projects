@@ -43,4 +43,6 @@ jobs:
     - name: Pack
       run: dotnet pack --configuration Release /p:Version=${{ vars.NUGET_VERSION }}.${{github.run_number}} --no-build --output .
     - name: Push
-      run: jfrog rt u NuGet.Library.${{ vars.NUGET_VERSION }}.${{github.run_number}}.nupkg --source https://${{ vars.JF_URL }}/ghjfdemo-nuget-Dev-local/ 
+      run: |
+          jf rt build-publish "JF.Library" ${{ vars.NUGET_VERSION }}.${{github.run_number}}
+    #  run: jfrog rt u NuGet.Library.${{ vars.NUGET_VERSION }}.${{github.run_number}}.nupkg --source https://${{ vars.JF_URL }}/ghjfdemo-nuget-Dev-local/ 
