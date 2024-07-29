@@ -1,0 +1,46 @@
+
+on:
+  push:
+    branches:
+    - nuget-sample-library
+permissions:
+  actions: read # for detecting the Github Actions environment.
+  id-token: write # for creating OIDC tokens for signing.
+  packages: write # for uploading attestations.
+  contents: read
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      JF_URL: https://${{ vars.JF_URL }}/
+    defaults:
+      run:
+        working-directory: ./nuget/sample-library
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+    - uses: jfrog/setup-jfrog-cli@v4
+      name: Setup JFrog CLI
+      id: setup-cli
+      env:
+          JF_URL: https://${{ vars.JF_URL }}/
+      with:
+            oidc-provider-name: jfrog-github-oidc
+    # This command adds a new server configuration to the JFrog CLI   
+    - run: |
+          jf -v
+      # Ping the JFrog Platfrom instnace 
+    - run: |
+          jf rt ping
+     # Configure JFrog CLI for NuGet 
+    - run: |
+          jf dotnetc --repo-resolve=nuget-remote
+   # - name: Set VERSION variable from tag
+  #    run: echo "VERSION=${GITHUB_REF/refs\/tags\/v/}" >> $GITHUB_ENV
+    - name: Build
+      run: dotnet build --configuration Release /p:Version=${{ vars.VERSION }}.${{github.run_number}}
+    - name: Pack
+      run: dotnet pack --configuration Release /p:Version=${{ vars.VERSION }}.${{github.run_number}} --no-build --output .
+    - name: Push
+      run: jfrog rt u NuGet.Library.${VERSION}.${{github.run_number}}.nupkg --source https://${{ vars.JF_URL }}/ghjfdemo-nuget-Dev-local/ 
